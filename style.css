@@ -1,1 +1,21 @@
 /* Tic-Tac-Toe styling */
+
+footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    color: #333333;
+    text-align: center;
+    font-family: sans-serif;
+    padding-bottom: .5em;
+}
+
+footer p a {
+    color: #333333;
+    text-decoration: none;
+}
+
+footer p a:hover {
+    text-shadow: 2px 2px 2px;
+}
