@@ -1,4 +1,32 @@
 /* Tic-Tac-Toe styling */
+h1 {
+    padding: 0px;
+    margin: 0px;
+    font-family: sans-serif;
+    text-align: center;
+    color: #333333;
+    font-weight: normal;
+    font-size: 3em;
+}
+
+#board{
+    margin: auto;
+}
+
+table {
+    padding-top: 5em;
+    margin: auto;
+}
+
+td {
+    background-color: #eeeeee;
+    border: 4px solid white;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 5em;
+}
 
 footer {
     position: fixed;
@@ -14,8 +42,4 @@ footer {
 footer p a {
     color: #333333;
     text-decoration: none;
-}
-
-footer p a:hover {
-    text-shadow: 2px 2px 2px;
 }
