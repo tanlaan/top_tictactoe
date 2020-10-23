@@ -49,9 +49,7 @@ let gameBoard = (() => {
     }
 
     const renderBoard = () => {
-        while(_table.firstChild) {
-            _table.removeChild(_table.lastChild)
-        }
+        _clearTable()
         for(i = 0; i < 3; i++) {
             let row = document.createElement('tr')
             for(j = 0; j < 3; j++){
@@ -67,10 +65,57 @@ let gameBoard = (() => {
         }
     }
 
-    renderBoard()
+    const _clearTable = () => {
+        while(_table.firstChild) {
+            _table.removeChild(_table.lastChild)
+        }
+    }
+
+    const isWinState = () => {
+        for(i = 0; i < 3; i++) {
+            // Check Horizontals
+            if(_state[i][0] != null && _state[i][0] === _state[i][1] && _state[i][1] === _state[i][2]) {
+                return true
+            }
+            // Check Verticals
+            if(_state[0][i] != null && _state[0][i] === _state[1][i] && _state[1][i] === _state[2][i]) {
+                return true
+            }
+        }
+        // Check Diagonals
+        if(_state[0][0] != null && _state[0][0] === _state[1][1] && _state[1][1] === _state[2][2]) {
+            return true
+        }
+        if(_state[0][2] != null && _state[0][2] === _state[1][1] && _state[1][1] === _state[2][0]) {
+            return true
+        }
+
+        return false
+    }
 
     return {
         makePlay,
         resetBoard,
+        renderBoard,
+        isWinState
+    }
+})()
+
+
+let gameController = (() => {
+    let winState = false;
+
+    let start = () => {
+        gameBoard.renderBoard()
+        _hidePlayButton()
+    }
+
+    let _hidePlayButton = () => {
+        let play = document.getElementById('play')
+        play.style.display = 'none'
+    }
+
+    return {
+        start,
     }
 })()

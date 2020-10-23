@@ -8,6 +8,13 @@ h1 {
     font-weight: normal;
     font-size: 3em;
 }
+main {
+    margin: auto;
+}
+#play {
+    display: block;
+    margin: 0px auto;
+}
 
 #board{
     margin: auto;
