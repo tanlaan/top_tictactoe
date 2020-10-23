@@ -1,18 +1,15 @@
 // Tic-Tac-Toe functionality
 
-let gameBoard = (() => {
+const gameBoard = (() => {
     let _state = [[null,null,null],
                   [null,null,null],
                   [null,null,null]]
-    
-    let _currentPlayer = 'X'
     
     let _table = document.getElementsByTagName('table')[0]
     
     const makePlay = (player, move) => {
         if(_isValidMove(move)) {
             _addPlay(player, move)
-            _togglePlayer()
             renderBoard()
             return true
         }
@@ -33,14 +30,6 @@ let gameBoard = (() => {
         _state[x][y] = player
     }
 
-    const _togglePlayer = () => {
-        if(_currentPlayer == 'X') {
-            _currentPlayer = 'O'
-        } else {
-            _currentPlayer = 'X'
-        }
-    }
-
     const resetBoard = () => {
         _state = [[null,null,null],
                   [null,null,null],
@@ -55,7 +44,7 @@ let gameBoard = (() => {
             for(j = 0; j < 3; j++){
                 let column = document.createElement('td')
                 let move = [i,j]
-                column.addEventListener("click", () =>  {makePlay(_currentPlayer, move)})
+                column.addEventListener("click", () =>  {gameController.play(move)})
                 if(_state[i][j] != null){
                     column.innerHTML = _state[i][j]
                 }
@@ -102,20 +91,50 @@ let gameBoard = (() => {
 })()
 
 
-let gameController = (() => {
-    let winState = false;
+const gameController = (() => {
+    _currentPlayer = 'X'
 
-    let start = () => {
+    const start = () => {
         gameBoard.renderBoard()
         _hidePlayButton()
     }
 
-    let _hidePlayButton = () => {
+    const _hidePlayButton = () => {
         let play = document.getElementById('play')
         play.style.display = 'none'
     }
 
+    const restart = () => {
+        gameBoard.resetBoard()
+        _currentPlayer = 'X'
+    }
+
+    const play = (move) => {
+        if(gameBoard.makePlay(_currentPlayer, move)) {
+            _togglePlayer()
+            if(gameBoard.isWinState()) {
+                _togglePlayer()
+                _displayWin()
+                restart()
+            }
+        }
+    }
+
+    const _togglePlayer = () => {
+        if(_currentPlayer == 'X') {
+            _currentPlayer = 'O'
+        } else {
+            _currentPlayer = 'X'
+        }
+    }
+
+    const _displayWin = () => {
+        alert(`${_currentPlayer} wins!`)
+    }
+
     return {
         start,
+        play,
+        restart
     }
 })()
