@@ -9,7 +9,17 @@
             <h1>Tic-Tac-Toe</h1>
         </header>
         <main>
-            <button id='play' onclick = 'gameController.start()'>PLAY</button>
+            <div id='menu'>
+                <div class="name-input">
+                    <label for="player1">Player1</label>
+                    <input id='player1' type="text" name="player1">
+                </div>
+                <div class="name-input">
+                    <label for="player2">Player2</label>
+                    <input id='player2' type="text" name="player2">
+                </div> 
+                <button id='play' onclick = 'gameController.start()'>PLAY</button>
+            </div>
             <div id='board'>
                 <table>
                 </table>

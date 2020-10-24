@@ -8,12 +8,19 @@ h1 {
     font-weight: normal;
     font-size: 3em;
 }
+
 main {
     margin: auto;
 }
-#play {
+
+#menu {
+    margin: auto;
+    width: 25%;
+}
+
+#menu button{
     display: block;
-    margin: 0px auto;
+    margin: auto;
 }
 
 #board{

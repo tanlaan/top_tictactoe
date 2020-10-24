@@ -7,13 +7,13 @@
 3. Complete
 4. Complete
     1. Complete
-5. Mostely Complete
-6. TODO
+5. Complete
+6. Complete
 7. Todo
     1. Todo
     2. Todo
     3. Todo
-    
+
 
 ## Assignment
 

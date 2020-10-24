@@ -82,25 +82,57 @@ const gameBoard = (() => {
         return false
     }
 
+    const isTieState = () => {
+        for(i = 0; i < 3; i++) {
+            for(j = 0; j < 3; j++) {
+                if(_state[i][j] === null) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
     return {
         makePlay,
         resetBoard,
         renderBoard,
-        isWinState
+        isWinState,
+        isTieState
     }
 })()
 
 
 const gameController = (() => {
     _currentPlayer = 'X'
+    _player1 = ''
+    _player2 = ''
 
     const start = () => {
-        gameBoard.renderBoard()
-        _hidePlayButton()
+        if(_getPlayerNames()){
+            _hideMenu()
+            gameBoard.renderBoard()
+        } else {
+            alert('We need two names to start.')
+        }
+
+
+    }
+    
+    const _getPlayerNames = () => {
+        _player1 = document.getElementById('player1').value
+        _player2 = document.getElementById('player2').value
+        if(_player1 === _player2) {
+            return true
+        } else if(_player1 == ''|| _player2 == '') {
+            return false
+        } else {
+            return true
+        }
     }
 
-    const _hidePlayButton = () => {
-        let play = document.getElementById('play')
+    const _hideMenu = () => {
+        let play = document.getElementById('menu')
         play.style.display = 'none'
     }
 
@@ -113,6 +145,9 @@ const gameController = (() => {
         if(gameBoard.makePlay(_currentPlayer, move)) {
             if(gameBoard.isWinState()) {
                 _displayWin()
+                restart()
+            } else if(gameBoard.isTieState()){
+                _displayTie()
                 restart()
             } else {
                 _togglePlayer()
@@ -129,7 +164,20 @@ const gameController = (() => {
     }
 
     const _displayWin = () => {
-        alert(`${_currentPlayer} wins!`)
+        if(_player1 != ''){
+            if(_currentPlayer == 'X'){
+                alert(`${_player1} wins!`)
+            } else {
+                alert(`${_player2} wins!`)
+            }
+        } else{
+            alert(`${_currentPlayer} wins!`)
+        }
+
+    }
+
+    const _displayTie = () => {
+        alert("It was a tie! NOBODY WINS!")
     }
 
     return {
