@@ -13,7 +13,6 @@ const gameBoard = (() => {
             renderBoard()
             return true
         }
-        alert('Bad move, try again.')
         return false
     }
     
@@ -93,12 +92,24 @@ const gameBoard = (() => {
         return true
     }
 
+    const dumbComputerMove = () => {
+        while(true){
+            let x = Math.floor(Math.random() * 3)
+            let y = Math.floor(Math.random() * 3)
+            if(makePlay('O', [x,y])) {
+                break
+            }
+        }
+            
+    }
+
     return {
         makePlay,
         resetBoard,
         renderBoard,
         isWinState,
-        isTieState
+        isTieState,
+        dumbComputerMove
     }
 })()
 
@@ -107,6 +118,7 @@ const gameController = (() => {
     _currentPlayer = 'X'
     _player1 = ''
     _player2 = ''
+    _singlePlayer = false
 
     const start = () => {
         if(_getPlayerNames()){
@@ -117,6 +129,12 @@ const gameController = (() => {
         }
 
 
+    }
+
+    const singlePlayer = () => {
+        _singlePlayer = true
+        _hideMenu()
+        gameBoard.renderBoard()
     }
     
     const _getPlayerNames = () => {
@@ -149,9 +167,25 @@ const gameController = (() => {
             } else if(gameBoard.isTieState()){
                 _displayTie()
                 restart()
-            } else {
+            } else if(_singlePlayer){
+                _makeComputerMove()
+            } else{
                 _togglePlayer()
             }
+        } else {
+            alert('Bad move, try again.')
+        }
+        
+    }
+
+    const _makeComputerMove = () => {
+        gameBoard.dumbComputerMove()
+        if(gameBoard.isWinState()){
+            alert('The Computer wins!')
+            restart()
+        } else if(gameBoard.isTieState()){
+            _displayTie()
+            restart()
         }
     }
 
@@ -183,6 +217,7 @@ const gameController = (() => {
     return {
         start,
         play,
-        restart
+        restart,
+        singlePlayer
     }
 })()

@@ -9,8 +9,8 @@
     1. Complete
 5. Complete
 6. Complete
-7. Todo
-    1. Todo
+7. In Progress
+    1. Complete
     2. Todo
     3. Todo
 
