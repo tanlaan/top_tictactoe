@@ -111,11 +111,11 @@ const gameController = (() => {
 
     const play = (move) => {
         if(gameBoard.makePlay(_currentPlayer, move)) {
-            _togglePlayer()
             if(gameBoard.isWinState()) {
-                _togglePlayer()
                 _displayWin()
                 restart()
+            } else {
+                _togglePlayer()
             }
         }
     }
